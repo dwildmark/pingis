@@ -13,19 +13,19 @@ void param_init(void)
 	char buffer[50] = {0};
 	
 	gets(buffer);
-	k_prop = (float)atoi(buffer);
+	k_prop = (float)atoi(buffer)/1000;
 	
 	gets(buffer);
-	k_int = (float)atoi(buffer);
+	k_int = (float)atoi(buffer)/1000;
 	
 	gets(buffer);
-	k_deriv = (float)atoi(buffer);
+	k_deriv = (float)atoi(buffer)/1000;
 	
 	gets(buffer);
-	shouldbeval = (int)atoi(buffer);
+	shouldbeval = (int)atoi(buffer)/1000;
 	
 	gets(buffer);
-	howoftenval = (int)atoi(buffer);
+	howoftenval = (int)atoi(buffer)/1000;
 }
 
 void configure_console(void)

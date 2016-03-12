@@ -29,7 +29,6 @@
  * Support and FAQ: visit <a href="http://www.atmel.com/design-support/">Atmel Support</a>
  */
 #include <asf.h>
-#include <stdlib.h>
 #include "uart_util.h"
 #include "task_com.h"
 #include "common.h"
@@ -54,18 +53,25 @@ int main (void)
 	
 	//Testing purposesssss
 	
-	utoa(k_prop, str, 10);
-	printf((char)k_prop);
+	itoa(k_prop * 1000, str, 10);
+	printf(str);
 	printf("\n");
-	printf((char)k_int);
+	itoa(k_int * 1000, str, 10);
+	printf(str);
 	printf("\n");
-	printf((char)k_deriv);
+	itoa(k_deriv * 1000, str, 10);
+	printf(str);
 	printf("\n");
-	printf((char)shouldbeval);
+	itoa(shouldbeval * 1000, str, 10);
+	printf(str);
 	printf("\n");
-	printf((char)howoftenval);
+	itoa(howoftenval * 1000, str, 10);
+	printf(str);
 	printf("\n");
+	
 	//end of testttttt
+	
+	
 	xTaskCreate(task_com, (const signed char * const) "Com", TASK_COM_STACKSIZE, NULL, 2, NULL);
 	vTaskStartScheduler();
 

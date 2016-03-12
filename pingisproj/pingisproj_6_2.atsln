@@ -1,0 +1,20 @@
+
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Atmel Studio Solution File, Format Version 11.00
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "pingisproj", "pingisproj\pingisproj_6_2.cproj", "{F0CD4A12-D532-4C81-BDC6-AF4F18F19A29}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|ARM = Debug|ARM
+		Release|ARM = Release|ARM
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F0CD4A12-D532-4C81-BDC6-AF4F18F19A29}.Debug|ARM.ActiveCfg = Debug|ARM
+		{F0CD4A12-D532-4C81-BDC6-AF4F18F19A29}.Debug|ARM.Build.0 = Debug|ARM
+		{F0CD4A12-D532-4C81-BDC6-AF4F18F19A29}.Release|ARM.ActiveCfg = Release|ARM
+		{F0CD4A12-D532-4C81-BDC6-AF4F18F19A29}.Release|ARM.Build.0 = Release|ARM
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

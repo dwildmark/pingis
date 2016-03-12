@@ -1,0 +1,26 @@
+function [ a ] = com( port, P, I, D, b, r )
+%COM Summary of this function goes here
+%   Detailed explanation goes here
+a = serial(port,'BaudRate',115200);
+fopen(a);
+pause(5);
+
+fprintf(a, P * 1000);
+
+fprintf(a, I * 1000);
+
+fprintf(a, D * 1000);
+
+fprintf(a, b * 1000);
+
+fprintf(a, r * 1000);
+
+fgetl(a)
+
+
+fprintf(a, 'hej');
+fprintf(a, '\n');
+fscanf(a)
+
+end
+
