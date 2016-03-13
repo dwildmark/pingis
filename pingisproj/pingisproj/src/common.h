@@ -14,5 +14,6 @@ extern float k_int;
 extern float k_deriv;
 extern uint16_t shouldbeval;
 extern uint16_t howoftenval;
+extern float conv_arr[100];
 
 #endif /* COMMON_H_ */

@@ -26,6 +26,12 @@ void param_init(void)
 	
 	gets(buffer);
 	howoftenval = (int)atoi(buffer)/1000;
+	
+	for (int i=0; i<100;i++)
+	{
+		gets(buffer);
+		conv_arr[i] = (float)atof(buffer);
+	}
 }
 
 void configure_console(void)

@@ -9,6 +9,7 @@
 #ifndef TASK_REG_H_
 #define TASK_REG_H_
 
+void task_reg(void *pvParameters);
 
 
 
