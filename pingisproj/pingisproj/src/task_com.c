@@ -14,7 +14,7 @@ void task_com(void *pvParameters)
 	
 	xLastWakeTime = xTaskGetTickCount();
 	
-	char buffer[50] = {0};
+	static char buffer[50] = {0};
 		
 	while(1)
 	{

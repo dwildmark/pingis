@@ -29,9 +29,14 @@
  * Support and FAQ: visit <a href="http://www.atmel.com/design-support/">Atmel Support</a>
  */
 #include <asf.h>
+#include <stdlib.h>
 #include "uart_util.h"
 #include "task_com.h"
 #include "common.h"
+#include "task_reg.h"
+#include "pwm_func.h"
+#include "motorshield.h"
+#include "adc_func.h"
 
 uint16_t values[100];
 
@@ -41,6 +46,7 @@ float k_deriv;
 uint16_t shouldbeval;
 uint16_t howoftenval;
 char str[100] = {0};
+float conv_arr[100] = {0.0};
 
 int main (void)
 {
@@ -49,6 +55,9 @@ int main (void)
 	board_init();
 	ioport_init();
 	configure_console();
+	motorshield_init();
+	adc_config();
+	pwm_config();
 	param_init();
 	
 	//Testing purposesssss
@@ -68,12 +77,20 @@ int main (void)
 	itoa(howoftenval * 1000, str, 10);
 	printf(str);
 	printf("\n");
+	itoa(conv_arr[47], str, 10);
+	printf(str);
+	printf("\n");
 	
 	//end of testttttt
 	
 	
 	xTaskCreate(task_com, (const signed char * const) "Com", TASK_COM_STACKSIZE, NULL, 2, NULL);
+	xTaskCreate(task_reg, (const signed char * const) "Reg", TASK_COM_STACKSIZE, NULL, 2, NULL);
 	vTaskStartScheduler();
+	
+	itoa(conv_arr[47], str, 10);
+	printf(str);
+	printf("\n");
 
 	/* Insert application code here, after the board has been initialized. */
 }

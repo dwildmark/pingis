@@ -2,11 +2,17 @@
 # Automatically-generated file. Do not edit or delete the file
 ################################################################################
 
+src\adc_func.c
+
 src\ASF\common\utils\stdio\read.c
 
 src\ASF\thirdparty\freertos\freertos-7.3.0\source\FreeRTOS_CLI.c
 
 src\ASF\thirdparty\wireless\addons\sio2host\uart\sio2host.c
+
+src\motorshield.c
+
+src\pwm_func.c
 
 src\task_com.c
 
