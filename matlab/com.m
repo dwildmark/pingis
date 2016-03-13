@@ -25,7 +25,6 @@ fgetl(a)
 fgetl(a)
 
 fprintf(a, 'hej');
-fprintf(a, '\n');
 fgetl(a)
 
 end
