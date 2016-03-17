@@ -40,6 +40,8 @@
 
 uint16_t values[100];
 
+xSemaphoreHandle semph = 1;
+
 float k_prop;
 float k_int;
 float k_deriv;
@@ -47,6 +49,11 @@ uint16_t shouldbeval;
 uint16_t howoftenval;
 char str[100] = {0};
 float conv_arr[100] = {0.0};
+uint16_t testval = 0;
+
+uint16_t error_val = 0;
+uint16_t pwm_val = 0;
+uint16_t ctrl_val = 0;
 
 int main (void)
 {

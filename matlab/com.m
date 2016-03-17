@@ -1,7 +1,13 @@
 function [ a ] = com( port, P, I, D, b, r )
 %COM Summary of this function goes here
+% port: the COM-port that arduino is connected to.
+% P: Proportionality constant for regulation.
+% I: Integration constant for regulation.
+% D: Derivative constant for regulation.
+% b: set value for regulation
+% r: rate of execution for regulation task.
 %   Detailed explanation goes here
-valuearr = importdata('regulator4.txt');
+valuearr = importdata('reg4.txt');
 a = serial(port,'BaudRate',115200);
 set(a, 'Terminator', 10);
 fopen(a);
@@ -23,14 +29,17 @@ for k = 1:100
     fprintf(a, valuearr(k));
 end
 
+%TEST, ta bort när färdig
 fgetl(a)
 fgetl(a)
 fgetl(a)
 fgetl(a)
 fgetl(a)
+%End of test
 
-fprintf(a, 'hej');
-fgetl(a)
+while(1)
+    
+end
 
 end
 

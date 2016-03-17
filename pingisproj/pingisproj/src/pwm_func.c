@@ -33,7 +33,7 @@ int pwm_config(void)
 	return 1;
 }
 
-void pwm_set_duty_cycle(uint32_t dutycycle)
+void pwm_set_value(uint32_t dutycycle)
 {
 	pwm_channel_update_duty(PWM, &pwm_instance, dutycycle);
 }

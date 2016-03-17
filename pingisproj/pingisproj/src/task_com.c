@@ -6,21 +6,30 @@
  */ 
 
 #include <asf.h>
+#include "common.h"
 
 void task_com(void *pvParameters)
 {
 	portTickType xLastWakeTime;
-	const portTickType xTimeIncrement = 10;
-	
+	const portTickType xTimeIncrement = 50;
+	char str[100] = {0};
 	xLastWakeTime = xTaskGetTickCount();
-	
-	static char buffer[50] = {0};
 		
 	while(1)
 	{
-		gets(buffer);
-		printf(buffer);
-		printf("\n");
-
+		if(xSemaphoreTake(semph, portMAX_DELAY))
+		{
+			itoa(error_val, str, 10);
+			printf(str);
+			printf("\n");
+			itoa(pwm_val, str, 10);
+			printf(str);
+			printf("\n");
+			itoa(ctrl_val, str, 10);
+			printf(str);
+			printf("\n");
+			xSemaphoreGive(semph);
+		}
+		vTaskDelayUntil(&xLastWakeTime, xTimeIncrement);
 	}
 }

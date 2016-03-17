@@ -7,6 +7,7 @@
 
 #include <asf.h>
 #include "common.h"
+#include "pwm_func.h"
 
 void task_reg(void *pvParameters)
 {
@@ -16,6 +17,10 @@ void task_reg(void *pvParameters)
 	xLastWakeTime = xTaskGetTickCount();
 	
 	while(1) {
-		
+// 		adc_start(ADC);
+// 		while((adc_get_status(ADC) & 0x1<<24)==0);
+// 		testval = adc_get_latest_value(ADC);
+		pwm_set_value(testval);
+		vTaskDelayUntil(&xLastWakeTime, xTimeIncrement);
 	}
 }

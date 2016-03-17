@@ -16,6 +16,6 @@
 #define PWM_PIO_PIN			PIO_PB16B_PWML0
 
 int pwm_config(void);
-void pwm_set_duty_cycle(uint32_t dutycycle);
+void pwm_set_value(uint32_t dutycycle);
 
 #endif /* PWM_H_ */
