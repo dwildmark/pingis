@@ -38,7 +38,7 @@ fgetl(a)
 %End of test
 
 while(1)
-    
+    fgetl(a);
 end
 
 end
