@@ -45,10 +45,10 @@ xSemaphoreHandle semph = 1;
 float k_prop;
 float k_int;
 float k_deriv;
-uint16_t shouldbeval;
-uint16_t howoftenval;
+uint16_t setpoint;
+uint16_t periodicity;
 char str[100] = {0};
-float conv_arr[100] = {0.0};
+uint16_t conv_arr[100] = {0};
 uint16_t testval = 0;
 
 uint16_t error_val = 0;
@@ -66,7 +66,8 @@ int main (void)
 	adc_config();
 	pwm_config();
 	param_init();
-	
+	vSemaphoreCreateBinary(semph);
+
 	//Testing purposesssss
 	
 	itoa(k_prop * 1000, str, 10);
@@ -78,26 +79,18 @@ int main (void)
 	itoa(k_deriv * 1000, str, 10);
 	printf(str);
 	printf("\n");
-	itoa(shouldbeval * 1000, str, 10);
+	itoa(setpoint * 1000, str, 10);
 	printf(str);
 	printf("\n");
-	itoa(howoftenval * 1000, str, 10);
-	printf(str);
-	printf("\n");
-	itoa(conv_arr[47], str, 10);
+	itoa(periodicity * 1000, str, 10);
 	printf(str);
 	printf("\n");
 	
 	//end of testttttt
 	
-	
 	xTaskCreate(task_com, (const signed char * const) "Com", TASK_COM_STACKSIZE, NULL, 2, NULL);
 	xTaskCreate(task_reg, (const signed char * const) "Reg", TASK_COM_STACKSIZE, NULL, 2, NULL);
 	vTaskStartScheduler();
-	
-	itoa(conv_arr[47], str, 10);
-	printf(str);
-	printf("\n");
 
 	/* Insert application code here, after the board has been initialized. */
 }

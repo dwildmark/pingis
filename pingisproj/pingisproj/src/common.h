@@ -12,9 +12,9 @@
 extern float k_prop;
 extern float k_int;
 extern float k_deriv;
-extern uint16_t shouldbeval;
-extern uint16_t howoftenval;
-extern float conv_arr[100];
+extern uint16_t setpoint;
+extern uint16_t periodicity;
+extern uint16_t conv_arr[100];
 extern uint16_t testval;
 
 extern uint16_t error_val;

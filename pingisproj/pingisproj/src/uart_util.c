@@ -22,10 +22,10 @@ void param_init(void)
 	k_deriv = (float)atoi(buffer)/1000;
 	
 	gets(buffer);
-	shouldbeval = (int)atoi(buffer)/1000;
+	setpoint = (int)atoi(buffer)/1000;
 	
 	gets(buffer);
-	howoftenval = (int)atoi(buffer)/1000;
+	periodicity = (int)atoi(buffer)/1000;
 	
 	for (int i=0; i<100;i++)
 	{
