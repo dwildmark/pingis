@@ -10,6 +10,10 @@
 #include "pwm_func.h"
 #include "task_reg.h"
 
+static int integ = 0;
+static int derivate = 0;
+static int olderr = 0;
+
 
 void task_reg(void *pvParameters)
 {
@@ -19,23 +23,22 @@ void task_reg(void *pvParameters)
 	xLastWakeTime = xTaskGetTickCount();
 	
 	uint16_t adc_val;
-	uint16_t distance;
-	int16_t newerr;
-	uint16_t offset = 500;
-	uint16_t output;
+// 	uint16_t distance;
+// 	int16_t newerr;
+// 	uint16_t offset = 500;
+// 	uint16_t output;
 	
 	while(1) {
 		
 		adc_start(ADC);
 		while((adc_get_status(ADC) & 0x1<<24)==0);
 		adc_val = adc_get_latest_value(ADC);
-		distance = calc_dist(adc_val);
-		newerr = setpoint - distance;
-		offset = 500;
-		output = offset -(k_prop * newerr);
-		
-		update_vars(newerr, output, distance);
-		pwm_set_value(output);
+// 		distance = calc_dist(adc_val);
+// 		newerr = setpoint - distance;
+// 		offset = 500;
+// 		output = offset -(k_prop * newerr);
+		regulate_P(adc_val);
+
 		vTaskDelayUntil(&xLastWakeTime, xTimeIncrement);
 	}
 }
@@ -57,4 +60,28 @@ void update_vars(int16_t new_error, uint16_t new_pwm, uint16_t new_dist)
 		error_val = new_error;
 		xSemaphoreGive(semph);
 	}
+}
+
+void regulate_P(uint16_t adcvalue)
+{
+	int distance = calc_dist(adcvalue);
+	int newerr = setpoint - distance;
+	int offset = 500;
+	uint16_t outpt = offset -(k_prop * newerr);
+	pwm_set_value(outpt);
+	update_vars(newerr, outpt, distance);
+}
+
+void regulate_PID(uint16_t adcvalue)
+{
+	int distance = calc_dist(adcvalue);
+	int newerr = distance - setpoint;
+	int offset = 500;
+	
+	int d_error = olderr - newerr;
+	integ = integ + ((1000/periodicity)/k_int)*newerr;
+	uint16_t outpt = k_prop*(-newerr );
+	pwm_set_value(outpt);
+	update_vars(newerr, outpt, distance);
+	olderr = newerr;
 }
