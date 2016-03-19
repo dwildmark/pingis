@@ -1,0 +1,2 @@
+fclose(instrfind);
+delete(instrfind);
