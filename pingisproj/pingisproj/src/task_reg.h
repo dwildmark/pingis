@@ -12,7 +12,8 @@
 void task_reg(void *pvParameters);
 
 uint16_t conv_adc_to_dist(uint16_t invalue);
-
+uint16_t calc_dist(uint16_t adcvalue);
+void update_vars(int16_t new_error, uint16_t new_pwm, uint16_t new_dist);
 
 
 #endif /* TASK_REG_H_ */

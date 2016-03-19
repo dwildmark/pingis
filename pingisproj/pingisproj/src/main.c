@@ -51,9 +51,9 @@ char str[100] = {0};
 uint16_t conv_arr[100] = {0};
 uint16_t testval = 0;
 
-uint16_t error_val = 0;
+uint16_t distance_val = 0;
 uint16_t pwm_val = 0;
-uint16_t ctrl_val = 0;
+int16_t error_val = 0;
 
 int main (void)
 {

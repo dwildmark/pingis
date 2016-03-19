@@ -6,6 +6,7 @@
  */ 
 
 #include <asf.h>
+#include "uart_util.h"
 #include "common.h"
 
 void param_init(void)
@@ -13,19 +14,19 @@ void param_init(void)
 	char buffer[50] = {0};
 	
 	gets(buffer);
-	k_prop = (float)atoi(buffer)/1000;
+	k_prop = (float)(atoi(buffer)/1000);
 	
 	gets(buffer);
-	k_int = (float)atoi(buffer)/1000;
+	k_int = (float)(atoi(buffer)/1000);
 	
 	gets(buffer);
-	k_deriv = (float)atoi(buffer)/1000;
+	k_deriv = (float)(atoi(buffer)/1000);
 	
 	gets(buffer);
-	setpoint = (int)atoi(buffer)/1000;
+	setpoint = (int)atoi(buffer);
 	
 	gets(buffer);
-	periodicity = (int)atoi(buffer)/1000;
+	periodicity = (int)atoi(buffer);
 	
 	for (int i=0; i<100;i++)
 	{

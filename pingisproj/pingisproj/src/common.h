@@ -17,9 +17,9 @@ extern uint16_t periodicity;
 extern uint16_t conv_arr[100];
 extern uint16_t testval;
 
-extern uint16_t error_val;
+extern uint16_t distance_val;
 extern uint16_t pwm_val;
-extern uint16_t ctrl_val;
+extern int16_t error_val;
 extern xSemaphoreHandle semph;
 
 #endif /* COMMON_H_ */

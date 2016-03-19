@@ -19,17 +19,17 @@ void task_com(void *pvParameters)
 	{
 		if(xSemaphoreTake(semph, portMAX_DELAY))
 		{
-// 			itoa(error_val, str, 10);
-// 			printf(str);
-// 			printf("\n");
+			itoa(error_val, str, 10);
+			printf(str);
+			printf("\n");
 			
 			itoa(pwm_val, str, 10);
 			printf(str);
 			printf("\n");
 			
-// 			itoa(ctrl_val, str, 10);
-// 			printf(str);
-// 			printf("\n");
+			itoa(distance_val, str, 10);
+			printf(str);
+			printf("\n");
 			
 			xSemaphoreGive(semph);
 		}
