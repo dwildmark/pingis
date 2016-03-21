@@ -1,33 +1,11 @@
 /**
- * \file
- *
- * \brief Empty user application template
- *
+ * This application is developed for the ping-pong ball control system. 
+ * The application communicates with a Matlab client connected through serial (UART).
+ * It runs the small real-time OS FreeRTOS with 2 tasks, one for communication and one for PID-control.
+ * 
+ *	Author: Dennis Wildmark, Olle Casperson
  */
 
-/**
- * \mainpage User Application template doxygen documentation
- *
- * \par Empty user application template
- *
- * Bare minimum empty user application template
- *
- * \par Content
- *
- * -# Include the ASF header files (through asf.h)
- * -# "Insert system clock initialization code here" comment
- * -# Minimal main function that starts with a call to board_init()
- * -# "Insert application code here" comment
- *
- */
-
-/*
- * Include header files for all drivers that have been imported from
- * Atmel Software Framework (ASF).
- */
-/*
- * Support and FAQ: visit <a href="http://www.atmel.com/design-support/">Atmel Support</a>
- */
 #include <asf.h>
 #include <stdlib.h>
 #include "uart_util.h"
@@ -57,7 +35,7 @@ int16_t error_val = 0;
 
 int main (void)
 {
-	/* Insert system clock initialization code here (sysclk_init()). */
+	/* Initialize all components of the project */
 	sysclk_init();
 	board_init();
 	ioport_init();
@@ -65,11 +43,11 @@ int main (void)
 	motorshield_init();
 	adc_config();
 	pwm_config();
-	param_init();
+	param_init(); //Recieve the values that matlab sends and save them
+	/* Semaphore is for synchronization of the values between the two tasks */
 	vSemaphoreCreateBinary(semph);
 
-	//Testing purposesssss
-	
+	/* Prints out all the variables for confirmation */
 	itoa(k_prop * 1000, str, 10);
 	printf(str);
 	printf("\n");
@@ -86,11 +64,8 @@ int main (void)
 	printf(str);
 	printf("\n");
 	
-	//end of testttttt
-	
+	/* Create the two tasks and start the scheduler */
 	xTaskCreate(task_com, (const signed char * const) "Com", TASK_COM_STACKSIZE, NULL, 2, NULL);
 	xTaskCreate(task_reg, (const signed char * const) "Reg", TASK_COM_STACKSIZE, NULL, 2, NULL);
 	vTaskStartScheduler();
-
-	/* Insert application code here, after the board has been initialized. */
 }

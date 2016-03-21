@@ -2,7 +2,7 @@
  * common.h
  *
  * Created: 2016-03-12 18:07:25
- *  Author: Spellabbet
+ *  Author: Dennis Wildmark, Olle Casperson
  */ 
 
 
