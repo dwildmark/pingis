@@ -4,6 +4,8 @@
 
 src\adc_func.c
 
+src\ASF\common\services\delay\sam\cycle_counter.c
+
 src\ASF\common\utils\stdio\read.c
 
 src\ASF\thirdparty\freertos\freertos-7.3.0\source\FreeRTOS_CLI.c

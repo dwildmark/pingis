@@ -40,7 +40,7 @@
 
 uint16_t values[100];
 
-xSemaphoreHandle semph = 1;
+xSemaphoreHandle semph = (xSemaphoreHandle) 1;
 
 float k_prop;
 float k_int;

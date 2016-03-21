@@ -14,13 +14,13 @@ void param_init(void)
 	char buffer[50] = {0};
 	
 	gets(buffer);
-	k_prop = (float)(atoi(buffer)/1000);
+	k_prop = (float)atoi(buffer)/1000;
 	
 	gets(buffer);
-	k_int = (float)(atoi(buffer)/1000);
+	k_int = (float)atoi(buffer)/1000;
 	
 	gets(buffer);
-	k_deriv = (float)(atoi(buffer)/1000);
+	k_deriv = (float)atoi(buffer)/1000;
 	
 	gets(buffer);
 	setpoint = (int)atoi(buffer);
