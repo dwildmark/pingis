@@ -65,7 +65,7 @@ int main (void)
 	printf("\n");
 	
 	/* Create the two tasks and start the scheduler */
-	xTaskCreate(task_com, (const signed char * const) "Com", TASK_COM_STACKSIZE, NULL, 2, NULL);
+	xTaskCreate(task_com, (const signed char * const) "Com", TASK_COM_STACKSIZE, NULL, 1, NULL);
 	xTaskCreate(task_reg, (const signed char * const) "Reg", TASK_COM_STACKSIZE, NULL, 2, NULL);
 	vTaskStartScheduler();
 }

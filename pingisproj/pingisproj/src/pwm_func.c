@@ -35,7 +35,6 @@ int pwm_config(void)
 
 void pwm_set_value(uint32_t dutycycle)
 {
- 	dutycycle = max(dutycycle, 0);
- 	dutycycle = min(dutycycle, 999);
+ 	dutycycle = min(max(dutycycle, 0), 999);
 	pwm_channel_update_duty(PWM, &pwm_instance, dutycycle);
 }
