@@ -1,4 +1,4 @@
-function [ a ] = com( port, P, I, D, b, r )
+function [ a, y ] = com( port, P, I, D, b, r )
 %COM Summary of this function goes here
 % port: the COM-port that arduino is connected to.
 % P: Proportionality constant for regulation.
@@ -7,7 +7,7 @@ function [ a ] = com( port, P, I, D, b, r )
 % b: set value for regulation
 % r: rate of execution for regulation task.
 %   Detailed explanation goes here
-valuearr = importdata('reg4.txt');
+valuearr = importdata('bana4.txt');
 a = serial(port,'BaudRate',115200);
 set(a, 'Terminator', 10);
 fopen(a);
@@ -29,30 +29,35 @@ for k = 1:100
     fprintf(a, num2str(valuearr(k)));
 end
 tempval = zeros(r,3);
-plotval = rand(r*30,3);
-%TEST, ta bort när färdig
-fgetl(a)
-fgetl(a)
-fgetl(a)
-fgetl(a)
-fgetl(a)
+setpoint = b.*ones(r*60, 1);
+plotval = zeros(r*60,4);
+plotval(:,4) = setpoint;
+%Confirmation of variables sent
+disp(str2double(fgetl(a))/1000);
+disp(str2double(fgetl(a))/1000);
+disp(str2double(fgetl(a))/1000);
+disp(str2double(fgetl(a))/1000);
+disp(str2double(fgetl(a))/1000);
 %End of test
 
-while(1)
+
+plot1 = plot(1:r*60, plotval);
+
+while ishandle(plot1)
     for i = 1 : r
+        tempval = circshift(tempval, 1);
         tempval(1,1) = str2double(fgetl(a));
         tempval(1,2) = str2double(fgetl(a));
         tempval(1,3) = str2double(fgetl(a));
-        tempval = circshift(tempval, 1);
-        %disp(tempval(1,1))
     end
     plotval = circshift(plotval, r);
     plotval(1:r,1:3) = tempval;
-    plot1 = plot(1:r*30,plotval);
-    legend('Felvärde', 'Utvärde', 'Avstånd')
+    plot1 = plot(1:r*60,plotval);
+    legend('Felvärde', 'Utvärde', 'Avstånd', 'Börvärde')
     pause(0.5)
  
 end
-
+y = plotval;
+plot(1:r*60,y);
 end
 
