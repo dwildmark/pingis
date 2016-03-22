@@ -54,6 +54,10 @@ uint16_t calc_dist(uint16_t adcvalue)
 	return r_calc - f_calc;
 }
 
+/************************************************************************/
+/* Function that updates the values if the semaphore isn't taken        */
+/* by the other task.                                                   */
+/************************************************************************/
 void update_vars(int16_t new_error, uint16_t new_pwm, uint16_t new_dist)
 {
 	if(xSemaphoreTake(semph, portMAX_DELAY))
@@ -64,6 +68,7 @@ void update_vars(int16_t new_error, uint16_t new_pwm, uint16_t new_dist)
 		xSemaphoreGive(semph);
 	}
 }
+
 /* P-controller, used to determine PID-values */
 // void regulate_P(uint16_t adcvalue)
 // {
