@@ -109,7 +109,7 @@ uint16_t filter_adc(uint16_t invalue)
 {
 	static float xb[4] = {0}; //Buffer to hold the values. Static, so it doesn't reset between function calls.
 		
-	/* Coefficients produced by Matlab's filter design tool */
+	/* Coefficients that creates a floating average FIR */
 	static float b[4] = {0.25, 0.25, 0.25, 0.25};
 		
 	uint16_t filtered_val = 0;
