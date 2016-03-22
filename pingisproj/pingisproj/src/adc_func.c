@@ -1,8 +1,8 @@
 /*
- * adc.c
+ * This file contains a function for initializing the ADC.
  *
- * Created: 2016-02-19 14:06:32
- *  Author: Dennis Wildmark
+ * 
+ *  Author: Dennis Wildmark, Olle Casperson
  */ 
 
 #include <asf.h>

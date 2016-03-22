@@ -1,7 +1,7 @@
 /*
- * common.h
+ * This file holds variables that are shared between
+ * tasks in the project.
  *
- * Created: 2016-03-12 18:07:25
  *  Author: Dennis Wildmark, Olle Casperson
  */ 
 

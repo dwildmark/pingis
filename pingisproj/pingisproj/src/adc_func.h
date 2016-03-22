@@ -1,7 +1,7 @@
 /*
  * adc.h
  *
- * Created: 2016-02-19 14:06:43
+ *
  *  Author: Dennis Wildmark
  */ 
 

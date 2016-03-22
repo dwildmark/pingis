@@ -1,14 +1,16 @@
 /*
- * pwm.c
+ * This file holds functions for initializing and using the PWM device.
  *
- * Created: 2016-02-19 14:12:43
- *  Author: Dennis Wildmark
+ *  Author: Dennis Wildmark, Olle Casperson
  */ 
 #include <asf.h>
 #include "pwm_func.h"
 
 static pwm_channel_t pwm_instance;
 
+/************************************************************************/
+/* Function initializes the PWM with the defined settings               */
+/************************************************************************/
 int pwm_config(void)
 {
 	if(pmc_enable_periph_clk(ID_PWM) == 0) {
@@ -33,6 +35,10 @@ int pwm_config(void)
 	return 1;
 }
 
+/************************************************************************/
+/* Function sets PWM dutycycle to the provided value.                   */
+/* It also limits it to between 0 and PWM_RESOLUTION.                   */
+/************************************************************************/
 void pwm_set_value(uint32_t dutycycle)
 {
  	dutycycle = min(max(dutycycle, 0), 999);

@@ -1,8 +1,8 @@
 /*
  * uart_util.h
  *
- * Created: 2016-03-12 17:43:16
- *  Author: Spellabbet
+ *
+ *  Author: Dennis Wildmark, Olle Casperson
  */ 
 
 

@@ -1,7 +1,7 @@
 /*
  * motorshield.h
  *
- * Created: 2016-02-19 13:59:44
+ *
  *  Author: Dennis Wildmark
  */ 
 

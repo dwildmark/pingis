@@ -1,7 +1,8 @@
 /*
- * motorshield.c
+ * This file contains a function for initializing the 
+ * IO-pins used by the motorshield to their correct direction
+ * and value.
  *
- * Created: 2016-02-19 13:59:23
  *  Author: Dennis Wildmark, Olle Casperson
  */ 
 

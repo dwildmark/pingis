@@ -1,8 +1,8 @@
 /*
- * uart_util.c
+ * This file contains functions for initializing 
+ * UART communication and parameters.
  *
- * Created: 2016-03-12 17:41:31
- *  Author: Spellabbet
+ *  Author: Dennis Wildmark, Olle Casperson
  */ 
 
 #include <asf.h>

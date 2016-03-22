@@ -1,7 +1,7 @@
 /*
  * task_reg.h
  *
- * Created: 2016-03-12 17:55:25
+ *
  *  Author: Dennis Wildmark, Olle Casperson
  */ 
 

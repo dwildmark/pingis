@@ -1,12 +1,13 @@
 /*
- * task_com.c
- *
- * Created: 2016-03-12 17:48:36
- *  Author: Spellabbet
+ * This file contains a task used for communication
+ * with a serial interface.
+ * 
+ *  Author: Dennis Wildmark, Olle Casperson
  */ 
 
 #include <asf.h>
 #include "common.h"
+
 
 void task_com(void *pvParameters)
 {
@@ -17,6 +18,7 @@ void task_com(void *pvParameters)
 		
 	while(1)
 	{
+		/* If the semaphore is available, send the values over serial */
 		if(xSemaphoreTake(semph, portMAX_DELAY))
 		{
 			itoa(error_val, str, 10);

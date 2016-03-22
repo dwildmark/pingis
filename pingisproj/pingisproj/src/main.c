@@ -16,16 +16,18 @@
 #include "motorshield.h"
 #include "adc_func.h"
 
-uint16_t values[100];
-
-xSemaphoreHandle semph = (xSemaphoreHandle) 1;
+/* This semaphore is used to synchronize			*/
+/* the variables that are used by both tasks		*/
+/* by only letting a task change or read these		*/
+/* variables if the semaphore is available.			*/
+xSemaphoreHandle semph = (xSemaphoreHandle) 1;		
 
 float k_prop;
 float k_int;
 float k_deriv;
 uint16_t setpoint;
 uint16_t periodicity;
-char str[100] = {0};
+char str[50] = {0};
 uint16_t conv_arr[100] = {0};
 uint16_t testval = 0;
 
@@ -43,11 +45,11 @@ int main (void)
 	motorshield_init();
 	adc_config();
 	pwm_config();
-	param_init(); //Recieve the values that matlab sends and save them
-	/* Semaphore is for synchronization of the values between the two tasks */
-	vSemaphoreCreateBinary(semph);
+	param_init(); //Receive the values that Matlab sends and save them
+	
+	vSemaphoreCreateBinary(semph); //Create semaphore queue
 
-	/* Prints out all the variables for confirmation */
+	/* Print out all the received variables for confirmation */
 	itoa(k_prop * 1000, str, 10);
 	printf(str);
 	printf("\n");
