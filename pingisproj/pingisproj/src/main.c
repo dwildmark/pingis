@@ -20,7 +20,7 @@
 /* the variables that are used by both tasks		*/
 /* by only letting a task change or read these		*/
 /* variables if the semaphore is available.			*/
-xSemaphoreHandle semph = (xSemaphoreHandle) 1;		
+xSemaphoreHandle semph = (xSemaphoreHandle) 1;
 
 float k_prop;
 float k_int;

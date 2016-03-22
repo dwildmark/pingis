@@ -44,13 +44,13 @@ void task_reg(void *pvParameters)
 uint16_t calc_dist(uint16_t adcvalue)
 {
 	/* Chooses index from filtered ADC-value */
-	int i = filter_adc(adcvalue)/10;
+	int i = filter_adc(adcvalue/10) - 1;
 	/* Index is subtracted by one because the array begins on index 0 in C */
-	int r_calc = conv_arr[i-1];
+	int r_calc = conv_arr[i];
 	/* By using the delta between i - 1 and i values and multiplying       */
 	/* it by the digit in the ADC-value that we lose in the first step     */
 	/* we interpolate and get a more accurate value						   */
-	int f_calc = (conv_arr[i] - r_calc) * (float)((adcvalue % 10) / 10);
+	int f_calc = (conv_arr[i + 1] - r_calc) * (float)((adcvalue % 10) / 10);
 	return r_calc - f_calc;
 }
 
@@ -73,9 +73,9 @@ void update_vars(int16_t new_error, uint16_t new_pwm, uint16_t new_dist)
 // void regulate_P(uint16_t adcvalue)
 // {
 // 	int distance = calc_dist(adcvalue);
-// 	int newerr = setpoint - distance;
+// 	int newerr = distance - setpoint;
 // 	int offset = 500;
-// 	uint16_t outpt = offset -(k_prop * newerr);
+// 	uint16_t outpt = offset (k_prop * newerr);
 // 	pwm_set_value(outpt);
 // 	update_vars(newerr, outpt, distance);
 // }
@@ -88,16 +88,15 @@ void regulate_PID(uint16_t adcvalue)
 	static int old_err = 0; //Variable that holds the error from last function call
 	const float dT = (float) periodicity/1000; //Calculate the time step
 	int real_dist = calc_dist(adcvalue); //ADC-value converted to millimeters
-	int new_err = setpoint - real_dist; //Current error
-	int integ_lim = 150000; //A limit for the integral part, reduces 
+	int new_err = real_dist - setpoint; //Current error
 	sum_err += new_err; //add the new error to the error sum
-	sum_err = max(min(sum_err, integ_lim), -integ_lim); //Limit the error sum from integ_lim tog (-integ_lim)
+	sum_err = max(min(sum_err, INTEG_LIM), -INTEG_LIM); //Limit the error sum from INTEG_LIM to (-INTEG_LIM)
 	int d_err = old_err - new_err; //difference in error from last function call, used in the derivative part
 	
 	/* Calculates the proportional, integral and derivative parts of the controller value */
-	float prop = (-k_prop) * (float)new_err;
-	float integ = (-k_prop) * (float)((dT * sum_err)/k_int);
-	float deriv = (-k_prop) * (float)((d_err/dT) * k_deriv);
+	float prop = (k_prop) * (float)new_err;
+	float integ = (k_prop) * (float)((dT * sum_err)/k_int);
+	float deriv = (k_prop) * (float)((d_err/dT) * k_deriv);
 	
 	int pwm_outval = OFFSET + (int)(prop + integ + deriv); //
 	pwm_set_value(pwm_outval); //Write control value to pwm
@@ -111,7 +110,7 @@ uint16_t filter_adc(uint16_t invalue)
 	static float xb[4] = {0}; //Buffer to hold the values. Static, so it doesn't reset between function calls.
 		
 	/* Coefficients produced by Matlab's filter design tool */
-	static float b[4] = {0.1590552379689, 0.3121634809933, 0.3121634809933, 0.1590552379689};
+	static float b[4] = {0.25, 0.25, 0.25, 0.25};
 		
 	uint16_t filtered_val = 0;
 	

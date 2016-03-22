@@ -9,6 +9,7 @@
 #include "uart_util.h"
 #include "common.h"
 
+/* Receive values sent from Matlab and store them in the appropriate variable */
 void param_init(void)
 {
 	char buffer[50] = {0};
